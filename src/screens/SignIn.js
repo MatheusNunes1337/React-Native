@@ -1,11 +1,11 @@
 import React from 'react'
-import {View, StyleSheet, Text} from 'react-native'
+import {View, StyleSheet, Text, Image} from 'react-native'
 
 const SignIn = (props) => {
     return (
         <View style={styles.container}>   
             <View style={styles.divSuperior}>
-                
+               <Image source={require('../assets/images/logo.png')} /> 
             </View>
             <View style={styles.divInferior}>
                 
