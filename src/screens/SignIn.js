@@ -1,13 +1,38 @@
 import React from 'react'
-import {View, Text} from 'react-native'
+import {View, StyleSheet, Text} from 'react-native'
 
 const SignIn = (props) => {
     return (
-        <View>
-            <Text onPress={() => props.navigation.navigate('Home')}>Home</Text>
-            <Text onPress={() => props.navigation.navigate('SignUp')}>SignUp</Text>
-        </View>
+        <View style={styles.container}>   
+            <View style={styles.divSuperior}>
+                
+            </View>
+            <View style={styles.divInferior}>
+                
+            </View>
+        </View>   
     )
 }
 
 export default SignIn
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        padding: 25
+    }, 
+
+    divSuperior: {
+        flex: 5,
+        alignItems: 'center',
+        backgroundColor: 'red'
+    },
+
+    divInferior: {
+        flex: 1,
+        alignItems: 'center',
+        marginTop: 25,
+        backgroundColor: 'blue'
+    },
+})
