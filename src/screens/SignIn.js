@@ -1,129 +1,133 @@
-import React from 'react'
-import {View, StyleSheet, Text, Image, TextInput, Button} from 'react-native'
-import MeuButton from '../components/MeuButton'
-import { white, dark, darkBlue, primary, gray } from '../assets/colors'
+import React from 'react';
+import {View, StyleSheet, Text, Image, TextInput, Button} from 'react-native';
+import MeuButton from '../components/MeuButton';
+import {white, dark, darkBlue, primary, gray} from '../assets/colors';
 
+const SignIn = props => {
+  function recuperarSenha() {
+    alert('abrir modal de recuperar senha!');
+  }
 
-const SignIn = (props) => {
+  function entrar() {
+    alert('entrei!');
+  }
 
-    function recuperarSenha() {
-        alert('abrir modal de recuperar senha!')
-    }
+  function cadastrar() {
+    alert('vai para a screen sign up');
+  }
 
-    function entrar() {
-        alert('entrei!')
-    }
+  return (
+    <View style={styles.container}>
+      <View style={styles.divSuperior}>
+        <Image
+          style={styles.logo}
+          accessibilityLabel="logo do app"
+          source={require('../assets/images/logo.png')}
+        />
+        <TextInput style={styles.input} />
+        <TextInput style={styles.input} />
+        <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>
+          Esqueceu sua senha?
+        </Text>
+        <MeuButton texto="Entrar" onClick={entrar} />
+      </View>
+      <View style={styles.divInferior}>
+        <View style={styles.divOuHr}>
+          <View style={styles.divHr} />
+          <Text style={styles.textOu}>OU</Text>
+          <View style={styles.divHr} />
+        </View>
+        <View style={styles.divCadastrarSe}>
+          <Text style={styles.textNormal}>Não tem uma conta?</Text>
+          <Text style={styles.textCadastrarSe} onPress={cadastrar}>
+            Cadastre-se
+          </Text>
+        </View>
+      </View>
+    </View>
+  );
+};
 
-    function cadastrar() {
-        alert('vai para a screen sign up')
-    }
-
-    return (
-        <View style={styles.container}>   
-            <View style={styles.divSuperior}>
-               <Image style={styles.logo} 
-               accessibilityLabel="logo do app"
-               source={require('../assets/images/logo.png')} />
-               <TextInput style={styles.input}/>
-               <TextInput style={styles.input}/>
-               <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>Esqueceu sua senha?</Text>
-               <MeuButton texto="Entrar" onClick={entrar}/>
-            </View>
-            <View style={styles.divInferior}>
-                <View style={styles.divOuHr}>
-                    <View style={styles.divHr} />
-                    <Text style={styles.textOu}>OU</Text>
-                    <View style={styles.divHr} />
-                </View>
-                <View style={styles.divCadastrarSe}>
-                    <Text style={styles.textNormal}>Não tem uma conta?</Text>
-                    <Text style={styles.textCadastrarSe} onPress={cadastrar}>Cadastre-se</Text>
-                </View>
-            </View>
-        </View>   
-    )
-}
-
-export default SignIn
+export default SignIn;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 25
-    }, 
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 25,
+  },
 
-    divSuperior: {
-        flex: 5,
-        alignItems: 'center',
-    },
+  divSuperior: {
+    flex: 5,
+    alignItems: 'center',
+  },
 
-    divInferior: {
-        flex: 1,
-        alignItems: 'center',
-        marginTop: 25,
-    },
+  divInferior: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 25,
+  },
 
-    logo: {
-        width: 150,
-        height: 150,
-        margin: 15
-    },
-    
-    input: {
-        width: '95%',
-        height: 50,
-        borderBottomColor: gray,
-        borderBottomWidth: 2,
-        fontSize: 16,
-        paddingLeft: 2,
-        paddingBottom: 1
-    },
+  logo: {
+    width: 150,
+    height: 150,
+    margin: 15,
+  },
 
-    textEsqueceuSenha: {
-        fontSize: 18,
-        color: dark,
-        alignSelf: 'flex-end',
-        marginTop: 14,
-        marginBottom: 14
-    },
-    divOuHr: {
-        width: '100%',
-        height: 25,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
+  input: {
+    width: '95%',
+    height: 50,
+    borderBottomColor: gray,
+    borderBottomWidth: 2,
+    fontSize: 16,
+    paddingLeft: 2,
+    paddingBottom: 1,
+  },
 
-    divHr: {
-        width: '30%',
-        height: 1,
-        borderBottomColor: gray,
-        borderBottomWidth: 2
-    },
+  textEsqueceuSenha: {
+    fontSize: 18,
+    color: dark,
+    alignSelf: 'flex-end',
+    marginTop: 14,
+    marginBottom: 14,
+  },
+  divOuHr: {
+    width: '100%',
+    height: 25,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
-    textOu: {
-        marginLeft: 20,
-        marginRight: 20,
-        fontSize: 20,
-        color: gray
-    },
+  divHr: {
+    width: '30%',
+    height: 1,
+    borderBottomColor: gray,
+    borderBottomWidth: 2,
+  },
 
-    divCadastrarSe: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20
-    },
+  textOu: {
+    marginLeft: 20,
+    marginRight: 20,
+    fontSize: 20,
+    color: gray,
+  },
 
-    textNormal: {
-        fontSize: 18,
-    },
+  divCadastrarSe: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
 
-    textCadastrarSe: {
-        fontSize: 16,
-        color: primary,
-        marginLeft: 8
-    }
+  textNormal: {
+    fontSize: 18,
+  },
+
+  textCadastrarSe: {
+    fontSize: 16,
+    color: primary,
+    marginLeft: 8,
+  },
 })

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "493615174948",
+    "project_id": "projetorn-1380c",
+    "storage_bucket": "projetorn-1380c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493615174948:android:493c755adfaa311d8f4fb1",
+        "android_client_info": {
+          "package_name": "com.projetorn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493615174948-9ep3cp3pbit87d8rn8ito171u343t4ah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWRC1bz34-ZgEqCThpo20B_2XW7iFOleM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493615174948-9ep3cp3pbit87d8rn8ito171u343t4ah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
