@@ -1,5 +1,13 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image, TextInput, Button} from 'react-native';
+import {
+  SafeAreaView,
+  ScrowView,
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TextInput,
+} from 'react-native';
 import MeuButton from '../components/MeuButton';
 import {white, dark, darkBlue, primary, gray} from '../assets/colors';
 
@@ -17,34 +25,36 @@ const SignIn = props => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.divSuperior}>
-        <Image
-          style={styles.logo}
-          accessibilityLabel="logo do app"
-          source={require('../assets/images/logo.png')}
-        />
-        <TextInput style={styles.input} />
-        <TextInput style={styles.input} />
-        <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>
-          Esqueceu sua senha?
-        </Text>
-        <MeuButton texto="Entrar" onClick={entrar} />
-      </View>
-      <View style={styles.divInferior}>
-        <View style={styles.divOuHr}>
-          <View style={styles.divHr} />
-          <Text style={styles.textOu}>OU</Text>
-          <View style={styles.divHr} />
-        </View>
-        <View style={styles.divCadastrarSe}>
-          <Text style={styles.textNormal}>Não tem uma conta?</Text>
-          <Text style={styles.textCadastrarSe} onPress={cadastrar}>
-            Cadastre-se
+    <SafeAreaView style={styles.container}>
+      <ScrowView>
+        <View style={styles.divSuperior}>
+          <Image
+            style={styles.logo}
+            accessibilityLabel="logo do app"
+            source={require('../assets/images/logo.png')}
+          />
+          <TextInput style={styles.input} />
+          <TextInput style={styles.input} />
+          <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>
+            Esqueceu sua senha?
           </Text>
+          <MeuButton texto="Entrar" onClick={entrar} />
         </View>
-      </View>
-    </View>
+        <View style={styles.divInferior}>
+          <View style={styles.divOuHr}>
+            <View style={styles.divHr} />
+            <Text style={styles.textOu}>OU</Text>
+            <View style={styles.divHr} />
+          </View>
+          <View style={styles.divCadastrarSe}>
+            <Text style={styles.textNormal}>Não tem uma conta?</Text>
+            <Text style={styles.textCadastrarSe} onPress={cadastrar}>
+              Cadastre-se
+            </Text>
+          </View>
+        </View>
+      </ScrowView>
+    </SafeAreaView>
   );
 };
 
@@ -130,4 +140,4 @@ const styles = StyleSheet.create({
     color: primary,
     marginLeft: 8,
   },
-})
+});
