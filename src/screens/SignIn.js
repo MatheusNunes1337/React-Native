@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   SafeAreaView,
-  ScrowView,
+  ScrollView,
   View,
   StyleSheet,
   Text,
@@ -26,34 +26,34 @@ const SignIn = props => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrowView>
-        <View style={styles.divSuperior}>
-          <Image
-            style={styles.logo}
-            accessibilityLabel="logo do app"
-            source={require('../assets/images/logo.png')}
-          />
-          <TextInput style={styles.input} />
-          <TextInput style={styles.input} />
-          <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>
-            Esqueceu sua senha?
+      <ScrollView>
+      <View style={styles.divSuperior}>
+        <Image
+          style={styles.logo}
+          accessibilityLabel="logo do app"
+          source={require('../assets/images/logo.png')}
+        />
+        <TextInput style={styles.input} />
+        <TextInput style={styles.input} />
+        <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>
+          Esqueceu sua senha?
+        </Text>
+        <MeuButton texto="Entrar" onClick={entrar} />
+      </View>
+      <View style={styles.divInferior}>
+        <View style={styles.divOuHr}>
+          <View style={styles.divHr} />
+          <Text style={styles.textOu}>OU</Text>
+          <View style={styles.divHr} />
+        </View>
+        <View style={styles.divCadastrarSe}>
+          <Text style={styles.textNormal}>Não tem uma conta?</Text>
+          <Text style={styles.textCadastrarSe} onPress={cadastrar}>
+            Cadastre-se
           </Text>
-          <MeuButton texto="Entrar" onClick={entrar} />
         </View>
-        <View style={styles.divInferior}>
-          <View style={styles.divOuHr}>
-            <View style={styles.divHr} />
-            <Text style={styles.textOu}>OU</Text>
-            <View style={styles.divHr} />
-          </View>
-          <View style={styles.divCadastrarSe}>
-            <Text style={styles.textNormal}>Não tem uma conta?</Text>
-            <Text style={styles.textCadastrarSe} onPress={cadastrar}>
-              Cadastre-se
-            </Text>
-          </View>
-        </View>
-      </ScrowView>
+      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
