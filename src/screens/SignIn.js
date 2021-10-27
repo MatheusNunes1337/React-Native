@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -12,12 +12,16 @@ import MeuButton from '../components/MeuButton';
 import {white, dark, darkBlue, primary, gray} from '../assets/colors';
 
 const SignIn = props => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('');
+
   function recuperarSenha() {
     alert('abrir modal de recuperar senha!');
   }
 
   function entrar() {
-    alert('entrei!');
+    console.log(email)
+    console.log(password)
   }
 
   function cadastrar() {
@@ -27,32 +31,45 @@ const SignIn = props => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-      <View style={styles.divSuperior}>
-        <Image
-          style={styles.logo}
-          accessibilityLabel="logo do app"
-          source={require('../assets/images/logo.png')}
-        />
-        <TextInput style={styles.input} />
-        <TextInput style={styles.input} />
-        <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>
-          Esqueceu sua senha?
-        </Text>
-        <MeuButton texto="Entrar" onClick={entrar} />
-      </View>
-      <View style={styles.divInferior}>
-        <View style={styles.divOuHr}>
-          <View style={styles.divHr} />
-          <Text style={styles.textOu}>OU</Text>
-          <View style={styles.divHr} />
-        </View>
-        <View style={styles.divCadastrarSe}>
-          <Text style={styles.textNormal}>Não tem uma conta?</Text>
-          <Text style={styles.textCadastrarSe} onPress={cadastrar}>
-            Cadastre-se
+        <View style={styles.divSuperior}>
+          <Image
+            style={styles.logo}
+            accessibilityLabel="logo do app"
+            source={require('../assets/images/logo.png')}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            keyboardType="email-address"
+            returnKeyType="next"
+            onChangeText={e => setEmail(e)}
+          />
+          <TextInput
+            style={styles.input}
+            secureTextEntry={true}
+            placeholder="Senha"
+            keyboardType="default"
+            returnKeyType="go"
+            onChangeText={p => setPassword(p)}
+          />
+          <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>
+            Esqueceu sua senha?
           </Text>
+          <MeuButton texto="Entrar" onClick={entrar} />
         </View>
-      </View>
+        <View style={styles.divInferior}>
+          <View style={styles.divOuHr}>
+            <View style={styles.divHr} />
+            <Text style={styles.textOu}>OU</Text>
+            <View style={styles.divHr} />
+          </View>
+          <View style={styles.divCadastrarSe}>
+            <Text style={styles.textNormal}>Não tem uma conta?</Text>
+            <Text style={styles.textCadastrarSe} onPress={cadastrar}>
+              Cadastre-se
+            </Text>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -141,3 +158,4 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 });
+ 
