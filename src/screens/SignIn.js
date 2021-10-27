@@ -7,6 +7,7 @@ import {
   Text,
   Image,
   TextInput,
+  Alert,
 } from 'react-native';
 import MeuButton from '../components/MeuButton';
 import {white, dark, darkBlue, primary, gray} from '../assets/colors';
@@ -27,16 +28,16 @@ const SignIn = props => {
     } catch (err) {
       switch (err.code) {
         case 'auth/user-not-found':
-          alert(err);
+          Alert.alert('Erro', 'Usuário não encontrado');
           break;
         case 'auth/wrong-password':
-          alert(err);
+          Alert.alert('Erro', 'Algo de errado ocorreu com a sua senha');
           break;
         case 'auth/invalid-email':
-          alert(err);
+          Alert.alert('Erro', 'Email inválido');
           break;
         case 'auth/user-disabled':
-          alert(err);
+          Alert.alert('Erro', 'Usuário desabilitado');
           break;
       }
     }
