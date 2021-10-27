@@ -35,6 +35,9 @@ const SignIn = props => {
         case 'auth/invalid-email':
           alert(err);
           break;
+        case 'auth/user-disabled':
+          alert(err);
+          break;
       }
     }
   }
