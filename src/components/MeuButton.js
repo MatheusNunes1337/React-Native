@@ -3,7 +3,6 @@ import {Text, StyleSheet, TouchableHighlight} from 'react-native';
 import { white, primary } from '../assets/colors';
 
 function MeuButton(props) {
-  console.log(props);
   return (
     <TouchableHighlight style={styles.button} onPress={() => props.onClick()}>
       <Text style={styles.text}>{props.texto}</Text>

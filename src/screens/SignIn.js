@@ -10,18 +10,33 @@ import {
 } from 'react-native';
 import MeuButton from '../components/MeuButton';
 import {white, dark, darkBlue, primary, gray} from '../assets/colors';
+import auth from '@react-native-firebase/auth';
 
 const SignIn = props => {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function recuperarSenha() {
     alert('abrir modal de recuperar senha!');
   }
 
-  function entrar() {
-    console.log(email)
-    console.log(password)
+  async function entrar() {
+    try {
+      await auth().signInWithEmailAndPassword(email, password);
+      console.log('logou');
+    } catch (err) {
+      switch (err.code) {
+        case 'auth/user-not-found':
+          alert(err);
+          break;
+        case 'auth/wrong-password':
+          alert(err);
+          break;
+        case 'auth/invalid-email':
+          alert(err);
+          break;
+      }
+    }
   }
 
   function cadastrar() {
@@ -158,4 +173,3 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 });
- 
