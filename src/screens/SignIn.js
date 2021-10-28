@@ -20,7 +20,7 @@ const SignIn = ({navigation}) => {
   const [password, setPassword] = useState('');
 
   function recuperarSenha() {
-    alert('abrir modal de recuperar senha!');
+    navigation.navigate('ForgotPassword');
   }
 
   async function entrar() {
