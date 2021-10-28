@@ -29,6 +29,12 @@ const SignIn = ({navigation}) => {
         throw new Error('Email e senha não podem estar vazios');
       }
       await auth().signInWithEmailAndPassword(email, password);
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'Home'}],
+        }),
+      );
     } catch (err) {
       switch (err.code) {
         case 'auth/user-not-found':
