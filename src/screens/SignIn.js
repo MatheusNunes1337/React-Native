@@ -12,8 +12,10 @@ import {
 import MeuButton from '../components/MeuButton';
 import {white, dark, darkBlue, primary, gray} from '../assets/colors';
 import auth from '@react-native-firebase/auth';
+import {CommonActions} from '@react-navigation/routers';
+import Home from './Home';
 
-const SignIn = props => {
+const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,8 +25,10 @@ const SignIn = props => {
 
   async function entrar() {
     try {
+      if (email === '' || password === '') {
+        throw new Error('Email e senha não podem estar vazios');
+      }
       await auth().signInWithEmailAndPassword(email, password);
-      console.log('logou');
     } catch (err) {
       switch (err.code) {
         case 'auth/user-not-found':
@@ -38,6 +42,9 @@ const SignIn = props => {
           break;
         case 'auth/user-disabled':
           Alert.alert('Erro', 'Usuário desabilitado');
+          break;
+        default:
+          Alert.alert('Erro', err.message);
           break;
       }
     }
