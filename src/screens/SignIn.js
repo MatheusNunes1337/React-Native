@@ -57,7 +57,12 @@ const SignIn = ({navigation}) => {
   }
 
   function cadastrar() {
-    alert('vai para a screen sign up');
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{name: 'SignUp'}],
+      }),
+    );
   }
 
   return (
