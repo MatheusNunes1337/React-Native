@@ -57,12 +57,7 @@ const SignIn = ({navigation}) => {
   }
 
   function cadastrar() {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{name: 'SignUp'}],
-      }),
-    );
+    navigation.navigate('SignUp');
   }
 
   return (
