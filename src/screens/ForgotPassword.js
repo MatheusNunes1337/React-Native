@@ -1,13 +1,41 @@
 import React, {useState} from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
+import {View, TextInput, StyleSheet, Alert} from 'react-native';
 import MeuButton from '../components/MeuButton';
 import {gray} from '../assets/colors';
+import auth from '@react-native-firebase/auth';
 
-const ForgotPassword = () => {
+const ForgotPassword = ({navigation}) => {
   const [email, setEmail] = useState('');
 
-  const recover = () => {
-    alert(email);
+  const recover = async () => {
+    try {
+      if (email !== '') {
+        await auth().sendPasswordResetEmail(email);
+        Alert.alert(
+          'Atenção',
+          'Enviamos um email de recuperação de senha para o seguinte endereço de email: ' +
+            email,
+          [{text: 'OK', onPress: () => navigation.goBack()}],
+        );
+      } else {
+        Alert.alert('Atenção', 'O campo de email não pode estar vazio');
+      }
+    } catch (err) {
+      switch (err.code) {
+        case 'auth/user-not-found':
+          Alert.alert('Erro', 'Email não encontrado');
+          break;
+        case 'auth/invalid-email':
+          Alert.alert('Erro', 'Email inválido');
+          break;
+        case 'auth/user-disabled':
+          Alert.alert('Erro', 'Usuário desabilitado');
+          break;
+        default:
+          Alert.alert('Erro', err.message);
+          break;
+      }
+    }
   };
 
   return (
