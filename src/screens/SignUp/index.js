@@ -1,12 +1,8 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Body} from './styles.js';
 
 const SignUp = () => {
-  return (
-    <View>
-      <Text>Sign Up</Text>
-    </View>
-  );
+  return <Body />;
 };
 
 export default SignUp;
