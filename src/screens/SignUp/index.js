@@ -23,11 +23,16 @@ const SignUp = ({navigation}) => {
         throw new Error('Campos de Email e senha não pode estar vazios');
       }
       await auth().createUserWithEmailAndPassword(email, password);
-      Alert.alert('Informação', 'Usuário cadastrado com sucesso');
+      const user = auth().currentUser;
+      await user.sendEmailVerification();
+      Alert.alert(
+        'Informação',
+        `Foi enviado um email para ${email} para verificação do cadastro`,
+      );
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
-          routes: [{name: 'Home'}],
+          routes: [{name: 'SignIn'}],
         }),
       );
     } catch (err) {
