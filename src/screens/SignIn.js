@@ -29,6 +29,9 @@ const SignIn = ({navigation}) => {
         throw new Error('Email e senha não podem estar vazios');
       }
       await auth().signInWithEmailAndPassword(email, password);
+      if (!auth().currentUser.emailVerified) {
+        throw new Error('Você deve verificar o seu email para prosseguir');
+      }
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
