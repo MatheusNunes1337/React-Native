@@ -13,15 +13,32 @@ import MeuButton from '../components/MeuButton';
 import {white, dark, darkBlue, primary, gray} from '../assets/colors';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/routers';
+import firestore from '@react-native-firebase/firestore';
 import Home from './Home';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function recuperarSenha() {
+  const recuperarSenha = () => {
     navigation.navigate('ForgotPassword');
-  }
+  };
+
+  const getUser = async () => {
+    try {
+      const doc = await firestore()
+        .collection('users')
+        .doc(auth().currentUser.uid)
+        .get();
+      if (doc.exists) {
+        console.log('Document data:', doc.data());
+      } else {
+        console.log('O documento não existe na base de dados!');
+      }
+    } catch (err) {
+      Alert.alert('Erro', err.message);
+    }
+  };
 
   async function entrar() {
     try {
@@ -32,6 +49,7 @@ const SignIn = ({navigation}) => {
       if (!auth().currentUser.emailVerified) {
         throw new Error('Você deve verificar o seu email para prosseguir');
       }
+      getUser();
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
