@@ -4,6 +4,7 @@ import {Body, TextInput} from './styles.js';
 import MeuButton from '../../components/MeuButton';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/routers';
+import firestore from '@react-native-firebase/firestore';
 
 const SignUp = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -24,6 +25,16 @@ const SignUp = ({navigation}) => {
       }
       await auth().createUserWithEmailAndPassword(email, password);
       const user = auth().currentUser;
+
+      const userInfo = {};
+      userInfo.username = username;
+      userInfo.email = email;
+      userInfo.password = password;
+      userInfo.type = type;
+      userInfo.area = area;
+
+      await firestore().collection('users').doc(user.uid).set(userInfo);
+      console.log('usuário adicionado ao banco de dados');
       await user.sendEmailVerification();
       Alert.alert(
         'Informação',
