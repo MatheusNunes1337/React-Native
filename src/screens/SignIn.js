@@ -29,6 +29,12 @@ const SignIn = ({navigation}) => {
     try {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem('user', jsonValue);
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'Home'}],
+        }),
+      );
     } catch (err) {
       Alert.alert(err.message);
     }
@@ -60,12 +66,6 @@ const SignIn = ({navigation}) => {
         throw new Error('Você deve verificar o seu email para prosseguir');
       }
       getUser();
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{name: 'Home'}],
-        }),
-      );
     } catch (err) {
       switch (err.code) {
         case 'auth/user-not-found':
