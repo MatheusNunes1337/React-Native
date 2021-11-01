@@ -14,6 +14,7 @@ import {white, dark, darkBlue, primary, gray} from '../assets/colors';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/routers';
 import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Home from './Home';
 
 const SignIn = ({navigation}) => {
@@ -24,6 +25,15 @@ const SignIn = ({navigation}) => {
     navigation.navigate('ForgotPassword');
   };
 
+  const storeUser = async value => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('user', jsonValue);
+    } catch (err) {
+      Alert.alert(err.message);
+    }
+  };
+
   const getUser = async () => {
     try {
       const doc = await firestore()
@@ -31,7 +41,7 @@ const SignIn = ({navigation}) => {
         .doc(auth().currentUser.uid)
         .get();
       if (doc.exists) {
-        console.log('Document data:', doc.data());
+        storeUser(doc.data());
       } else {
         console.log('O documento não existe na base de dados!');
       }
