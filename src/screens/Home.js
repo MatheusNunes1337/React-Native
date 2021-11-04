@@ -1,12 +1,24 @@
-import React from 'react'
-import {View, Text} from 'react-native'
+import React from 'react';
+import {View, Text, Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = () => {
-    return (
-        <View>
-            <Text>Home</Text>
-        </View>
-    )
-}
+  const getUserCache = async () => {
+    try {
+      const user = await AsyncStorage.getItem('user');
+      console.log('user cache', user);
+      return user != null ? JSON.parse(user) : null;
+    } catch (err) {
+      Alert.alert('Erro', err.message);
+    }
+  };
 
-export default Home
+  getUserCache();
+  return (
+    <View>
+      <Text>Home</Text>
+    </View>
+  );
+};
+
+export default Home;

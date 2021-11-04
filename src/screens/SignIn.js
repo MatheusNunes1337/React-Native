@@ -27,6 +27,7 @@ const SignIn = ({navigation}) => {
 
   const storeUser = async value => {
     try {
+      value.pass = password;
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem('user', jsonValue);
       navigation.dispatch(
