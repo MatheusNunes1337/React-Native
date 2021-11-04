@@ -5,6 +5,7 @@ import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
 import ForgotPassword from './src/screens/ForgotPassword';
 import Home from './src/screens/Home';
+import Preload from './src/screens/Preload';
 import {StatusBar} from 'react-native';
 import {primary, white} from './src/assets/colors';
 
@@ -14,7 +15,12 @@ function App() {
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={primary} />
-      <Stack.Navigator initialRouteName="SignIn">
+      <Stack.Navigator initialRouteName="Preload">
+        <Stack.Screen
+          name="Preload"
+          component={Preload}
+          options={preloadStyle}
+        />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SignUp" component={SignUp} />
@@ -25,6 +31,10 @@ function App() {
 }
 
 export default App;
+
+const preloadStyle = {
+  headerShown: false,
+};
 
 /*
 const signInStyle = {
