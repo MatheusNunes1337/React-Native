@@ -8,25 +8,28 @@ import Home from './src/screens/Home';
 import Preload from './src/screens/Preload';
 import {StatusBar} from 'react-native';
 import {primary, white} from './src/assets/colors';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <StatusBar backgroundColor={primary} />
-      <Stack.Navigator initialRouteName="Preload">
-        <Stack.Screen
-          name="Preload"
-          component={Preload}
-          options={preloadStyle}
-        />
-        <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <StatusBar backgroundColor={primary} />
+        <Stack.Navigator initialRouteName="Preload">
+          <Stack.Screen
+            name="Preload"
+            component={Preload}
+            options={preloadStyle}
+          />
+          <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 

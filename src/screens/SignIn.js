@@ -1,14 +1,5 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  TextInput,
-  Alert,
-} from 'react-native';
+import {SafeAreaView, ScrollView, View, StyleSheet, Alert} from 'react-native';
 import MeuButton from '../components/MeuButton';
 import {white, dark, darkBlue, primary, gray} from '../assets/colors';
 import auth from '@react-native-firebase/auth';
@@ -16,6 +7,8 @@ import {CommonActions} from '@react-navigation/routers';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Home from './Home';
+import {Input, Text, Image} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -93,49 +86,51 @@ const SignIn = ({navigation}) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={styles.divSuperior}>
-          <Image
-            style={styles.logo}
-            accessibilityLabel="logo do app"
-            source={require('../assets/images/logo.png')}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            keyboardType="email-address"
-            returnKeyType="next"
-            onChangeText={e => setEmail(e)}
-          />
-          <TextInput
-            style={styles.input}
-            secureTextEntry={true}
-            placeholder="Senha"
-            keyboardType="default"
-            returnKeyType="go"
-            onChangeText={p => setPassword(p)}
-          />
-          <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>
-            Esqueceu sua senha?
-          </Text>
-          <MeuButton texto="Entrar" onClick={entrar} />
-        </View>
-        <View style={styles.divInferior}>
-          <View style={styles.divOuHr}>
-            <View style={styles.divHr} />
-            <Text style={styles.textOu}>OU</Text>
-            <View style={styles.divHr} />
-          </View>
-          <View style={styles.divCadastrarSe}>
-            <Text style={styles.textNormal}>Não tem uma conta?</Text>
-            <Text style={styles.textCadastrarSe} onPress={cadastrar}>
-              Cadastre-se
+    <>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          <View style={styles.divSuperior}>
+            <Image
+              style={styles.logo}
+              accessibilityLabel="logo do app"
+              source={require('../assets/images/logo.png')}
+            />
+            <Input
+              style={styles.input}
+              placeholder="Email"
+              keyboardType="email-address"
+              returnKeyType="next"
+              onChangeText={e => setEmail(e)}
+            />
+            <Input
+              style={styles.input}
+              secureTextEntry={true}
+              placeholder="Senha"
+              keyboardType="default"
+              returnKeyType="go"
+              onChangeText={p => setPassword(p)}
+            />
+            <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>
+              Esqueceu sua senha?
             </Text>
+            <MeuButton texto="Entrar" onClick={entrar} />
           </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+          <View style={styles.divInferior}>
+            <View style={styles.divOuHr}>
+              <View style={styles.divHr} />
+              <Text style={styles.textOu}>OU</Text>
+              <View style={styles.divHr} />
+            </View>
+            <View style={styles.divCadastrarSe}>
+              <Text style={styles.textNormal}>Não tem uma conta?</Text>
+              <Text style={styles.textCadastrarSe} onPress={cadastrar}>
+                Cadastre-se
+              </Text>
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 
