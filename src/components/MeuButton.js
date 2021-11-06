@@ -1,12 +1,16 @@
 import React from 'react';
-import {Text, StyleSheet, TouchableHighlight} from 'react-native';
-import { white, primary } from '../assets/colors';
+import {Button} from 'react-native-elements';
+import {StyleSheet} from 'react-native';
+
+import {white, primary} from '../assets/colors';
 
 function MeuButton(props) {
   return (
-    <TouchableHighlight style={styles.button} onPress={() => props.onClick()}>
-      <Text style={styles.text}>{props.texto}</Text>
-    </TouchableHighlight>
+    <Button
+      buttonStyle={styles.button}
+      onPress={() => props.onClick()}
+      title={props.texto}
+    />
   );
 }
 
@@ -18,7 +22,7 @@ const styles = StyleSheet.create({
     color: white,
   },
   button: {
-    width: '95%',
+    width: 500,
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
@@ -26,5 +30,6 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
     borderRadius: 5,
+    textAlign: 'center',
   },
 });
