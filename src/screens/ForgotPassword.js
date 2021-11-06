@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {View, TextInput, StyleSheet, Alert} from 'react-native';
+import {View, StyleSheet, Alert} from 'react-native';
+import {Input, Text, Image} from 'react-native-elements';
 import MeuButton from '../components/MeuButton';
 import {gray} from '../assets/colors';
 import auth from '@react-native-firebase/auth';
@@ -40,7 +41,7 @@ const ForgotPassword = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
+      <Input
         style={styles.input}
         placeholder="Email"
         keyboardType="email-address"
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    width: '95%',
+    width: '40%',
     height: 50,
     borderBottomColor: gray,
     borderBottomWidth: 2,
