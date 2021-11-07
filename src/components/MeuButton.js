@@ -17,10 +17,6 @@ function MeuButton(props) {
 export default MeuButton;
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 20,
-    color: white,
-  },
   button: {
     width: 500,
     height: 50,
