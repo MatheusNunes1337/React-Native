@@ -1,12 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Input, Text} from 'react-native-elements';
 import {gray, white} from '../assets/colors';
 
-export default function User() {
+const User = ({route}) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [type, setType] = useState('');
+
+  useEffect(() => {
+    setUsername(route.params.user.username);
+    setEmail(route.params.user.email);
+    setType(route.params.user.type);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Input
@@ -33,7 +40,9 @@ export default function User() {
       />
     </View>
   );
-}
+};
+
+export default User;
 
 const styles = StyleSheet.create({
   container: {
