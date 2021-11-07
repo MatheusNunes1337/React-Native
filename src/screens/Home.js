@@ -4,9 +4,11 @@ import LogoutButton from '../components/LogoutButton';
 import {ListItem, Button} from 'react-native-elements';
 import {primary} from '../assets/colors';
 import firestore from '@react-native-firebase/firestore';
+import {CommonActions} from '@react-navigation/native';
 
 const Home = ({navigation}) => {
   const [list, setList] = useState([]);
+  console.log('oi');
 
   const getUsers = () => {
     firestore()
@@ -38,8 +40,13 @@ const Home = ({navigation}) => {
     getUsers();
   }, []);
 
-  const routeUser = () => {
-    alert('oi');
+  const routeUser = user => {
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: 'User',
+        params: {user},
+      }),
+    );
   };
 
   return (
@@ -48,7 +55,7 @@ const Home = ({navigation}) => {
         <ListItem
           key={i}
           containerStyle={styles.list}
-          onPress={routeUser}
+          onPress={() => routeUser(item)}
           bottomDivider>
           <ListItem.Content>
             <ListItem.Title>{item.username}</ListItem.Title>
