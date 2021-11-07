@@ -1,12 +1,19 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Alert} from 'react-native';
 import {Button, Image} from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
+import RNRestart from 'react-native-restart';
 
 const LogoutButton = () => {
-  const signOut = () => {
-    alert('sign out!');
+  const signOut = async () => {
+    try {
+      await AsyncStorage.removeItem('user');
+      auth().signOut();
+      RNRestart.Restart();
+    } catch (err) {
+      Alert.alert('Erro', err.message);
+    }
   };
 
   return (
