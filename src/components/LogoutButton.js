@@ -4,6 +4,7 @@ import {Button, Image} from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import RNRestart from 'react-native-restart';
+import {primary} from '../assets/colors';
 
 const LogoutButton = () => {
   const signOut = async () => {
@@ -16,25 +17,18 @@ const LogoutButton = () => {
     }
   };
 
-  return (
-    <Button style={styles.button} onPress={signOut}>
-      <Image
-        accessibilityLabel="sign out button"
-        source={require('../assets/images/exit.png')}
-        style={styles.image}
-      />
-    </Button>
-  );
+  return <Button buttonStyle={styles.button} onPress={signOut} title="sair" />;
 };
 
 export default LogoutButton;
 
 const styles = StyleSheet.create({
   button: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: primary,
   },
   image: {
     width: 45,
