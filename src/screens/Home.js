@@ -3,9 +3,32 @@ import {View, Text, Alert, StyleSheet} from 'react-native';
 import LogoutButton from '../components/LogoutButton';
 import {ListItem, Button} from 'react-native-elements';
 import {primary} from '../assets/colors';
+import firestore from '@react-native-firebase/firestore';
 
 const Home = ({navigation}) => {
-  const [list, setLIst] = useState([]);
+  const [list, setList] = useState([]);
+
+  const getUsers = () => {
+    firestore()
+      .collection('users')
+      .get()
+      .then(querySnapshot => {
+        const data = [];
+        querySnapshot.forEach(doc => {
+          const user = {
+            id: doc.id,
+            username: doc.data().username,
+            email: doc.data().email,
+            type: doc.data().type,
+          };
+          data.push(user);
+        });
+        setList(data);
+      })
+      .catch(err => {
+        Alert.alert('Erro', err.message);
+      });
+  };
 
   useEffect(() => {
     navigation.setOptions({
@@ -28,8 +51,9 @@ const Home = ({navigation}) => {
           onPress={routeUser}
           bottomDivider>
           <ListItem.Content>
-            <ListItem.Title>{item.nome}</ListItem.Title>
+            <ListItem.Title>{item.username}</ListItem.Title>
             <ListItem.Title>{item.email}</ListItem.Title>
+            <ListItem.Title>{item.type}</ListItem.Title>
           </ListItem.Content>
         </ListItem>
       ))}
