@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Button, Image} from 'react-native-elements';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import auth from '@react-native-firebase/auth';
 
 const LogoutButton = () => {
   const signOut = () => {
