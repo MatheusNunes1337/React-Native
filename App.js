@@ -9,6 +9,7 @@ import Preload from './src/screens/Preload';
 import {StatusBar} from 'react-native';
 import {primary, white} from './src/assets/colors';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import User from './src/screens/User';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,10 +24,23 @@ function App() {
             component={Preload}
             options={preloadStyle}
           />
-          <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen
+            name="SignIn"
+            component={SignIn}
+            options={signInStyle}
+          />
           <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="User" component={User} options={userStyle} />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+            options={signUpStyle}
+          />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={forgotPasswordStyle}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
@@ -39,11 +53,18 @@ const preloadStyle = {
   headerShown: false,
 };
 
-/*
 const signInStyle = {
-  headerLeft: false,
   title: 'Bem vindo',
-  headerStyle: {backgroundColor: primary},
-  headerTitleStyle: {color: white},
 };
-*/
+
+const signUpStyle = {
+  title: 'Cadastrar',
+};
+
+const userStyle = {
+  title: 'Usuário',
+};
+
+const forgotPasswordStyle = {
+  title: 'Recuperar senha',
+};
