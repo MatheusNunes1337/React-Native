@@ -1,18 +1,49 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Alert, ToastAndroid} from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 import {Input, Text} from 'react-native-elements';
 import {gray, white} from '../assets/colors';
+import MeuButton from '../components/MeuButton';
 
-const User = ({route}) => {
+const User = ({route, navigation}) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [type, setType] = useState('');
+  const [uid, setUid] = useState('');
 
   useEffect(() => {
     setUsername(route.params.user.username);
     setEmail(route.params.user.email);
     setType(route.params.user.type);
+    setUid(route.params.user.id);
   }, []);
+
+  const showToast = message => {
+    ToastAndroid.show(message, ToastAndroid.SHORT);
+  };
+
+  const save = () => {
+    firestore()
+      .collection('users')
+      .doc(uid)
+      .set(
+        {
+          username: username,
+        },
+        {merge: true},
+      )
+      .then(() => {
+        setUsername('');
+        setEmail('');
+        setType('');
+        setUid('');
+        showToast('Dados salvos com sucesso');
+        navigation.goBack();
+      })
+      .catch(err => {
+        Alert.alert('Erro', err.message);
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -38,6 +69,7 @@ const User = ({route}) => {
         editable={false}
         value={type}
       />
+      <MeuButton texto="Salvar" onClick={save} />
     </View>
   );
 };
