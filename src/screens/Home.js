@@ -13,23 +13,24 @@ const Home = ({navigation}) => {
   const getUsers = () => {
     firestore()
       .collection('users')
-      .get()
-      .then(querySnapshot => {
-        const data = [];
-        querySnapshot.forEach(doc => {
-          const user = {
-            id: doc.id,
-            username: doc.data().username,
-            email: doc.data().email,
-            type: doc.data().type,
-          };
-          data.push(user);
-        });
-        setList(data);
-      })
-      .catch(err => {
-        Alert.alert('Erro', err.message);
-      });
+      .onSnapshot(
+        querySnapshot => {
+          const data = [];
+          querySnapshot.forEach(doc => {
+            const user = {
+              id: doc.id,
+              username: doc.data().username,
+              email: doc.data().email,
+              type: doc.data().type,
+            };
+            data.push(user);
+          });
+          setList(data);
+        },
+        err => {
+          Alert.alert('Erro', err.message);
+        },
+      );
   };
 
   useEffect(() => {
