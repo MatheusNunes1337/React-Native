@@ -8,10 +8,9 @@ import {CommonActions} from '@react-navigation/native';
 
 const Home = ({navigation}) => {
   const [list, setList] = useState([]);
-  console.log('oi');
 
   const getUsers = () => {
-    firestore()
+    const unsubscribe = firestore()
       .collection('users')
       .onSnapshot(
         querySnapshot => {
@@ -31,6 +30,7 @@ const Home = ({navigation}) => {
           Alert.alert('Erro', err.message);
         },
       );
+    return unsubscribe;
   };
 
   useEffect(() => {
@@ -38,7 +38,11 @@ const Home = ({navigation}) => {
       title: 'Usuários',
       headerRight: () => <LogoutButton />,
     });
-    getUsers();
+    const unsubscribe = getUsers();
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const routeUser = user => {
