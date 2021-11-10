@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-import {Alert} from 'react-native';
-import {Container, Image} from './styles';
+import {Alert, StyleSheet, View} from 'react-native';
 import {CommonActions} from '@react-navigation/routers';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
+import {Image} from 'react-native-elements';
 
 const Preload = ({navigation}) => {
   const getUserCache = async () => {
@@ -59,13 +59,26 @@ const Preload = ({navigation}) => {
   }, []);
 
   return (
-    <Container>
+    <View style={styles.container}>
       <Image
+        style={styles.image}
         accessibilityLabel="logo do app"
-        source={require('../../assets/images/logo.png')}
+        source={require('../assets/images/logo.png')}
       />
-    </Container>
+    </View>
   );
 };
 
 export default Preload;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: 150,
+    height: 150,
+  },
+});

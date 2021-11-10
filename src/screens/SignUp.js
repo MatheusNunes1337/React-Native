@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {Alert} from 'react-native';
-import {Body, TextInput} from './styles.js';
-import MeuButton from '../../components/MeuButton';
+import {Alert, StyleSheet, View} from 'react-native';
+import MeuButton from '../components/MeuButton';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/routers';
 import firestore from '@react-native-firebase/firestore';
+import {Input} from 'react-native-elements';
 
 const SignUp = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -68,34 +68,39 @@ const SignUp = ({navigation}) => {
   };
 
   return (
-    <Body>
-      <TextInput
+    <View style={styles.container}>
+      <Input
+        style={styles.input}
         placeholder="Nome de usuário"
         keyboardType="default"
         returnKeyType="next"
         onChangeText={e => setUsername(e)}
       />
-      <TextInput
+      <Input
+        style={styles.input}
         placeholder="Email"
         keyboardType="email-address"
         returnKeyType="next"
         onChangeText={e => setEmail(e)}
       />
-      <TextInput
+      <Input
+        style={styles.input}
         secureTextEntry={true}
         placeholder="Senha"
         keyboardType="default"
         returnKeyType="next"
         onChangeText={p => setPassword(p)}
       />
-      <TextInput
+      <Input
+        style={styles.input}
         placeholder="Tipo"
         keyboardType="default"
         returnKeyType="next"
         onChangeText={e => setType(e)}
       />
       {type === 'teacher' ? (
-        <TextInput
+        <Input
+          style={styles.input}
           placeholder="Área"
           keyboardType="default"
           returnKeyType="go"
@@ -104,9 +109,28 @@ const SignUp = ({navigation}) => {
       ) : (
         false
       )}
-      <MeuButton texto="Cadastrar" onClick={cadastrar} />
-    </Body>
+      <MeuButton style={styles.button} texto="Cadastrar" onClick={cadastrar} />
+    </View>
   );
 };
 
 export default SignUp;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 25,
+  },
+  input: {
+    width: 95,
+    height: 50,
+    fontSize: 16,
+    marginBottom: 12,
+    paddingLeft: 2,
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

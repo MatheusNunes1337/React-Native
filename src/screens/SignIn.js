@@ -8,7 +8,6 @@ import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Home from './Home';
 import {Input, Text, Image} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
