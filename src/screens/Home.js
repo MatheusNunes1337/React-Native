@@ -5,9 +5,11 @@ import {ListItem, Button} from 'react-native-elements';
 import {primary} from '../assets/colors';
 import firestore from '@react-native-firebase/firestore';
 import {CommonActions} from '@react-navigation/native';
+import Loading from '../components/Loading';
 
 const Home = ({navigation}) => {
   const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getUsers = () => {
     const unsubscribe = firestore()
@@ -25,6 +27,7 @@ const Home = ({navigation}) => {
             data.push(user);
           });
           setList(data);
+          setLoading(false);
         },
         err => {
           Alert.alert('Erro', err.message);
@@ -69,6 +72,7 @@ const Home = ({navigation}) => {
           </ListItem.Content>
         </ListItem>
       ))}
+      {loading && <Loading />}
     </View>
   );
 };
