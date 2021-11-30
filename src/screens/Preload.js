@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
-import {CommonActions} from '@react-navigation/routers';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import {Image} from 'react-native-elements';
+import {CommonActions} from '@react-navigation/routers';
 
 const Preload = ({navigation}) => {
   const getUserCache = async () => {
@@ -18,6 +18,15 @@ const Preload = ({navigation}) => {
   const login = async () => {
     try {
       const user = await getUserCache();
+      if (user) {
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{name: 'Home'}],
+          }),
+        );
+      }
+      /*
       if (!user) {
         navigation.dispatch(
           CommonActions.reset({
@@ -26,13 +35,16 @@ const Preload = ({navigation}) => {
           }),
         );
       }
+      */
       await auth().signInWithEmailAndPassword(user.email, user.password);
+      /*
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
           routes: [{name: 'Home'}],
         }),
       );
+      */
     } catch (err) {
       switch (err.code) {
         case 'auth/user-not-found':

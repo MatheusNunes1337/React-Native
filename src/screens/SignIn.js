@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View, StyleSheet, Alert} from 'react-native';
 import MeuButton from '../components/MeuButton';
-import {white, dark, darkBlue, primary, gray} from '../assets/colors';
+import {dark, primary, gray} from '../assets/colors';
 import auth from '@react-native-firebase/auth';
-import {CommonActions} from '@react-navigation/routers';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Home from './Home';
 import {Input, Text, Image} from 'react-native-elements';
 
 const SignIn = ({navigation}) => {
@@ -22,12 +20,14 @@ const SignIn = ({navigation}) => {
       value.pass = password;
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem('user', jsonValue);
+      /*
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
           routes: [{name: 'Home'}],
         }),
       );
+      */
     } catch (err) {
       Alert.alert(err.message);
     }
