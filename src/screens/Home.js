@@ -5,6 +5,7 @@ import {ListItem} from 'react-native-elements';
 import firestore from '@react-native-firebase/firestore';
 import {CommonActions} from '@react-navigation/native';
 import Loading from '../components/Loading';
+import MeuButton from '../components/MeuButton';
 
 const Home = ({navigation}) => {
   const [list, setList] = useState([]);
@@ -56,6 +57,15 @@ const Home = ({navigation}) => {
     );
   };
 
+  const oi = () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{name: 'Groups'}],
+      }),
+    );
+  };
+
   return (
     <View style={styles.container}>
       {list.map((item, i) => (
@@ -71,6 +81,7 @@ const Home = ({navigation}) => {
           </ListItem.Content>
         </ListItem>
       ))}
+      <MeuButton texto="grupos" onClick={oi} />
       {loading && <Loading />}
     </View>
   );
