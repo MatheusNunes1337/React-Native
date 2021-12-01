@@ -3,7 +3,7 @@ import {ToastAndroid} from 'react-native';
 
 import {ApiContext} from '../context/ApiProvider';
 
-export const UserContext = createContext({});
+export const GroupContext = createContext({});
 
 export const GroupProvider = ({children}) => {
   const [groups, setGroups] = useState([]);
@@ -14,7 +14,15 @@ export const GroupProvider = ({children}) => {
     ToastAndroid.show(message, ToastAndroid.SHORT);
   };
 
-  const getGroups = () => {};
+  const getGroups = async () => {
+    try {
+      const response = await api.get('/groups');
+      console.log('dados da API', response);
+    } catch (response) {
+      console.log('Erro ao buscar via API');
+      console.log(response);
+    }
+  };
 
   const saveGroup = () => {};
 
@@ -23,7 +31,7 @@ export const GroupProvider = ({children}) => {
   const deleteGroup = () => {};
 
   return (
-    <UserContext.Provider
+    <GroupContext.Provider
       value={{
         groups,
         getGroups,
@@ -32,6 +40,6 @@ export const GroupProvider = ({children}) => {
         deleteGroup,
       }}>
       {children}
-    </UserContext.Provider>
+    </GroupContext.Provider>
   );
 };

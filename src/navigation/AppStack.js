@@ -1,10 +1,9 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Home from '../screens/Home';
 import User from '../screens/User';
 import Preload from '../screens/Preload';
+import Groups from '../screens/Groups';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +12,7 @@ function AppStack() {
     <Stack.Navigator initialRouteName="Preload">
       <Stack.Screen name="Preload" component={Preload} options={preloadStyle} />
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Groups" component={Groups} options={GroupStyle} />
       <Stack.Screen name="User" component={User} options={userStyle} />
     </Stack.Navigator>
   );
@@ -26,4 +26,8 @@ const preloadStyle = {
 
 const userStyle = {
   title: 'Usuário',
+};
+
+const GroupStyle = {
+  title: 'Grupos',
 };

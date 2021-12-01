@@ -9,7 +9,6 @@ import SignUp from '../screens/SignUp';
 const Stack = createNativeStackNavigator();
 
 function AuthStack() {
-  console.log('auth stack');
   return (
     <Stack.Navigator initialRouteName="SignIn">
       <Stack.Screen name="SignIn" component={SignIn} options={signInStyle} />
