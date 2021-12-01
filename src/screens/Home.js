@@ -81,7 +81,7 @@ const Home = ({navigation}) => {
           </ListItem.Content>
         </ListItem>
       ))}
-      <MeuButton texto="grupos" onClick={oi} />
+      <MeuButton style={styles.button} texto="grupos" onClick={oi} />
       {loading && <Loading />}
     </View>
   );
@@ -98,5 +98,9 @@ const styles = StyleSheet.create({
     width: 350,
     height: 100,
     marginTop: 25,
+  },
+
+  button: {
+    marginTop: 75,
   },
 });
