@@ -10,20 +10,11 @@ const Stack = createNativeStackNavigator();
 
 function AppStack() {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Preload">
-          <Stack.Screen
-            name="Preload"
-            component={Preload}
-            options={preloadStyle}
-          />
-
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="User" component={User} options={userStyle} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <Stack.Navigator initialRouteName="Preload">
+      <Stack.Screen name="Preload" component={Preload} options={preloadStyle} />
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="User" component={User} options={userStyle} />
+    </Stack.Navigator>
   );
 }
 

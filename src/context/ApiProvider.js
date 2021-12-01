@@ -15,7 +15,7 @@ export const ApiProvider = ({children}) => {
           if (idToken) {
             const apiLocal = create({
               baseURL:
-                'https://firestore.googleapis.com/v1//projects/projetorn-1380c/databases/(default)/documents/',
+                'https://firestore.googleapis.com/v1/projects/projetorn-1380c/databases/(default)/documents/',
               headers: {Authorization: 'Bearer' + idToken},
             });
             console.log(apiLocal);

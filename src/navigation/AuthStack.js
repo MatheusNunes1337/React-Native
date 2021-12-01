@@ -11,28 +11,15 @@ const Stack = createNativeStackNavigator();
 function AuthStack() {
   console.log('auth stack');
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="SignIn">
-          <Stack.Screen
-            name="SignIn"
-            component={SignIn}
-            options={signInStyle}
-          />
-
-          <Stack.Screen
-            name="SignUp"
-            component={SignUp}
-            options={signUpStyle}
-          />
-          <Stack.Screen
-            name="ForgotPassword"
-            component={ForgotPassword}
-            options={forgotPasswordStyle}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <Stack.Navigator initialRouteName="SignIn">
+      <Stack.Screen name="SignIn" component={SignIn} options={signInStyle} />
+      <Stack.Screen name="SignUp" component={SignUp} options={signUpStyle} />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
+        options={forgotPasswordStyle}
+      />
+    </Stack.Navigator>
   );
 }
 

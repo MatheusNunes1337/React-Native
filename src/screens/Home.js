@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Alert, StyleSheet} from 'react-native';
+import {View, Alert, StyleSheet} from 'react-native';
 import LogoutButton from '../components/LogoutButton';
-import {ListItem, Button} from 'react-native-elements';
-import {primary} from '../assets/colors';
+import {ListItem} from 'react-native-elements';
 import firestore from '@react-native-firebase/firestore';
 import {CommonActions} from '@react-navigation/native';
 import Loading from '../components/Loading';
