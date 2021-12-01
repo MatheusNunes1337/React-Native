@@ -34,7 +34,7 @@ const Groups = ({navigation}) => {
     );
   };
 
-  const createGroup = () => {
+  const goToGroup = () => {
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
@@ -57,11 +57,7 @@ const Groups = ({navigation}) => {
           </ListItem.Content>
         </ListItem>
       ))}
-      <MeuButton
-        style={styles.button}
-        texto="Novo grupo"
-        onClick={createGroup}
-      />
+      <MeuButton style={styles.button} texto="Novo grupo" onClick={goToGroup} />
       {loading && <Loading />}
     </View>
   );

@@ -57,7 +57,7 @@ const Home = ({navigation}) => {
     );
   };
 
-  const oi = () => {
+  const goToGroups = () => {
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
@@ -81,7 +81,7 @@ const Home = ({navigation}) => {
           </ListItem.Content>
         </ListItem>
       ))}
-      <MeuButton style={styles.button} texto="grupos" onClick={oi} />
+      <MeuButton style={styles.button} texto="grupos" onClick={goToGroups} />
       {loading && <Loading />}
     </View>
   );

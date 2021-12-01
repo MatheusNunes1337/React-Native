@@ -59,7 +59,6 @@ export const GroupProvider = ({children}) => {
   };
 
   const updateGroup = async data => {
-    console.log('2PM HANDS UP', data.uid);
     try {
       await api.patch('/groups' + data.uid, {
         fields: {
@@ -78,7 +77,17 @@ export const GroupProvider = ({children}) => {
     }
   };
 
-  const deleteGroup = async () => {};
+  const deleteGroup = async uid => {
+    try {
+      await api.delete('/groups' + uid);
+      showToast('Grupo excluído com sucesso.');
+      getGroups();
+    } catch (response) {
+      setErrorMessage(response);
+      console.log('Erro ao deletar via API.');
+      console.log(response);
+    }
+  };
 
   return (
     <GroupContext.Provider

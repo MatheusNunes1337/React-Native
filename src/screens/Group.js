@@ -23,12 +23,15 @@ const Group = ({route, navigation}) => {
     setDiscipline('');
     setTopics('');
     setUid('');
-    if (route.params.group) {
-      setName(route.params.group.name);
-      setDescription(route.params.group.description);
-      setDiscipline(route.params.group.discipline);
-      setTopics(route.params.group.topics);
-      setUid(route.params.group.uid);
+    console.log('ROUTEEEE', route);
+    if (route.params) {
+      if (route.params.group) {
+        setName(route.params.group.name);
+        setDescription(route.params.group.description);
+        setDiscipline(route.params.group.discipline);
+        setTopics(route.params.group.topics);
+        setUid(route.params.group.uid);
+      }
     }
     return () => {
       console.log('desmontou Group');
