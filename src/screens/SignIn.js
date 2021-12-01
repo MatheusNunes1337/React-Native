@@ -29,7 +29,7 @@ const SignIn = ({navigation}) => {
       );
       */
     } catch (err) {
-      Alert.alert(err.message);
+      console.error(err.message);
     }
   };
 

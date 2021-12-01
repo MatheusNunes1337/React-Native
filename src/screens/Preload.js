@@ -14,7 +14,7 @@ const Preload = ({navigation}) => {
       const user = await AsyncStorage.getItem('user');
       return user != null ? JSON.parse(user) : null;
     } catch (err) {
-      Alert.alert('Erro', err.message);
+      console.error('Erro', err.message);
     }
   };
 
