@@ -17,8 +17,23 @@ export const GroupProvider = ({children}) => {
   const getGroups = async () => {
     try {
       const response = await api.get('/groups');
-      console.log('dados da API', response);
+      let data = [];
+      response.data.documents.map(d => {
+        let key = d.name.split(
+          'projects/projetorn-1380c/databases/(default)/documents/groups',
+        );
+        data.push({
+          name: d.fields.name.stringValue,
+          description: d.fields.description.stringValue,
+          discipline: d.fields.discipline.stringValue,
+          topics: d.fields.topics.stringValue,
+          uid: key[1],
+        });
+      });
+      data.sort((a, b) => a.name.localeCompare(b.name));
+      setGroups(data);
     } catch (response) {
+      setErrorMessage(response);
       console.log('Erro ao buscar via API');
       console.log(response);
     }
