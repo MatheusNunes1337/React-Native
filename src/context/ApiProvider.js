@@ -18,7 +18,13 @@ export const ApiProvider = ({children}) => {
                 'https://firestore.googleapis.com/v1/projects/projetorn-1380c/databases/(default)/documents/',
               headers: {Authorization: 'Bearer' + idToken},
             });
-            console.log(apiLocal);
+            apiLocal.addResponseTransform(response => {
+              if (!response.ok) {
+                throw response;
+              }
+            });
+
+            setApi(apiLocal);
           }
         })
         .catch(e => {
@@ -28,6 +34,12 @@ export const ApiProvider = ({children}) => {
   };
 
   return (
-    <ApiContext.Provider value={(api, getApi)}>{children}</ApiContext.Provider>
+    <ApiContext.Provider
+      value={{
+        api,
+        getApi,
+      }}>
+      {children}
+    </ApiContext.Provider>
   );
 };

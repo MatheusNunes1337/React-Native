@@ -1,11 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import {Image} from 'react-native-elements';
 import {CommonActions} from '@react-navigation/routers';
+import {ApiContext} from '../context/ApiProvider';
 
 const Preload = ({navigation}) => {
+  const {getApi} = useContext(ApiContext);
+
   const getUserCache = async () => {
     try {
       const user = await AsyncStorage.getItem('user');
@@ -68,6 +71,7 @@ const Preload = ({navigation}) => {
 
   useEffect(() => {
     login();
+    getApi();
   }, []);
 
   return (

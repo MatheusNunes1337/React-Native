@@ -8,7 +8,9 @@ export default function Providers() {
   return (
     <SafeAreaProvider>
       <AuthUserProvider>
-        <Routes />
+        <ApiProvider>
+          <Routes />
+        </ApiProvider>
       </AuthUserProvider>
     </SafeAreaProvider>
   );
