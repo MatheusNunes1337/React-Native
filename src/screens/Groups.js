@@ -34,11 +34,11 @@ const Groups = ({navigation}) => {
     );
   };
 
-  const oi = () => {
+  const createGroup = () => {
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
-        routes: [{name: 'Groups'}],
+        routes: [{name: 'Group'}],
       }),
     );
   };
@@ -57,7 +57,11 @@ const Groups = ({navigation}) => {
           </ListItem.Content>
         </ListItem>
       ))}
-      <MeuButton style={styles.button} texto="Novo grupo" onClick={oi} />
+      <MeuButton
+        style={styles.button}
+        texto="Novo grupo"
+        onClick={createGroup}
+      />
       {loading && <Loading />}
     </View>
   );

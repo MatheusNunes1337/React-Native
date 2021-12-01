@@ -30,7 +30,7 @@ export const GroupProvider = ({children}) => {
           uid: key[1],
         });
       });
-      data.sort((a, b) => a.name.localeCompare(b.name));
+      data.sort((a, b) => b.name.localeCompare(a.name));
       setGroups(data);
     } catch (response) {
       setErrorMessage(response);
@@ -39,11 +39,46 @@ export const GroupProvider = ({children}) => {
     }
   };
 
-  const saveGroup = () => {};
+  const saveGroup = async data => {
+    try {
+      await api.post('/groups/', {
+        fields: {
+          name: {stringValue: data.name},
+          description: {stringValue: data.description},
+          discipline: {stringValue: data.discipline},
+          topics: {stringValue: data.topics},
+        },
+      });
+      showToast('Grupo criado com sucesso');
+      getGroups();
+    } catch (response) {
+      setErrorMessage(response);
+      console.log('Erro ao salvar via API');
+      console.log(response);
+    }
+  };
 
-  const updateGroup = () => {};
+  const updateGroup = async data => {
+    console.log('2PM HANDS UP', data.uid);
+    try {
+      await api.patch('/groups' + data.uid, {
+        fields: {
+          name: {stringValue: data.name},
+          description: {stringValue: data.description},
+          discipline: {stringValue: data.discipline},
+          topics: {stringValue: data.topics},
+        },
+      });
+      showToast('Informações do grupo atualizadas com sucesso');
+      getGroups();
+    } catch (response) {
+      setErrorMessage(response);
+      console.log('Erro ao atualizar via API');
+      console.log(response);
+    }
+  };
 
-  const deleteGroup = () => {};
+  const deleteGroup = async () => {};
 
   return (
     <GroupContext.Provider

@@ -4,6 +4,7 @@ import Home from '../screens/Home';
 import User from '../screens/User';
 import Preload from '../screens/Preload';
 import Groups from '../screens/Groups';
+import Group from '../screens/Group';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,7 +13,8 @@ function AppStack() {
     <Stack.Navigator initialRouteName="Preload">
       <Stack.Screen name="Preload" component={Preload} options={preloadStyle} />
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Groups" component={Groups} options={GroupStyle} />
+      <Stack.Screen name="Group" component={Group} options={GroupStyle} />
+      <Stack.Screen name="Groups" component={Groups} options={GroupsStyle} />
       <Stack.Screen name="User" component={User} options={userStyle} />
     </Stack.Navigator>
   );
@@ -28,6 +30,10 @@ const userStyle = {
   title: 'Usuário',
 };
 
-const GroupStyle = {
+const GroupsStyle = {
   title: 'Grupos',
+};
+
+const GroupStyle = {
+  title: 'Grupo',
 };
