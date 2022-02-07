@@ -40,12 +40,8 @@ const SignUp = ({navigation}) => {
         'Informação',
         `Foi enviado um email para ${email} para verificação do cadastro`,
       );
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{name: 'SignIn'}],
-        }),
-      );
+
+      navigation.navigate('SignIn');
     } catch (err) {
       switch (err.code) {
         case 'auth/email-already-in-use':

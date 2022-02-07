@@ -9,15 +9,15 @@ import {ReportProvider} from '../context/ReportProvider';
 export default function Providers() {
   return (
     <SafeAreaProvider>
-      <AuthUserProvider>
-        <ApiProvider>
+      <ApiProvider>
+        <AuthUserProvider>
           <ReportProvider>
             <GroupProvider>
               <Routes />
             </GroupProvider>
           </ReportProvider>
-        </ApiProvider>
-      </AuthUserProvider>
+        </AuthUserProvider>
+      </ApiProvider>
     </SafeAreaProvider>
   );
 }

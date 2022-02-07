@@ -6,6 +6,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Input, Text, Image} from 'react-native-elements';
+import {CommonActions} from '@react-navigation/native';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -20,14 +21,13 @@ const SignIn = ({navigation}) => {
       value.pass = password;
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem('user', jsonValue);
-      /*
+
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
           routes: [{name: 'Home'}],
         }),
       );
-      */
     } catch (err) {
       console.error(err.message);
     }

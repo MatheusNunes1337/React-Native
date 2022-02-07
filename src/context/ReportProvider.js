@@ -16,21 +16,20 @@ export const ReportProvider = ({children}) => {
 
   const getReports = async () => {
     try {
-      const response = await api.get('/groups');
+      const response = await api.get('/reports');
       let data = [];
       response.data.documents.map(d => {
         let key = d.name.split(
-          'projects/projetorn-1380c/databases/(default)/documents/groups',
+          'projects/projetorn-1380c/databases/(default)/documents/reports',
         );
         data.push({
           description: d.fields.description.stringValue,
           targetType: d.fields.targetType.stringValue,
-          createdAt: d.fields.createdAt.timestampValue,
-          analyzed: d.fields.analyzed.booleanValue,
+          analyzed: d.fields.analyzed.stringValue,
           uid: key[1],
         });
       });
-      data.sort((a, b) => b.name.localeCompare(a.name));
+
       setReports(data);
     } catch (response) {
       setErrorMessage(response);
@@ -44,9 +43,8 @@ export const ReportProvider = ({children}) => {
       await api.post('/reports/', {
         fields: {
           description: {stringValue: data.description},
-          discipline: {stringValue: data.targetType},
-          createdAt: {timestampValue: new Date()},
-          analyzed: {booleanValue: false},
+          targetType: {stringValue: data.targetType},
+          analyzed: {stringValue: data.analyzed},
         },
       });
       showToast(
@@ -65,8 +63,8 @@ export const ReportProvider = ({children}) => {
       await api.patch('/reports' + data.uid, {
         fields: {
           description: {stringValue: data.description},
-          discipline: {stringValue: data.targetType},
-          analyzed: {booleanValue: false},
+          targetType: {stringValue: data.targetType},
+          analyzed: {stringValue: data.analyzed},
         },
       });
       showToast('Denuncia atualizada com sucesso');

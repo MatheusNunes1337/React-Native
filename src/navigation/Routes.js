@@ -11,8 +11,7 @@ import {primary} from '../assets/colors';
 
 export default function Routes() {
   const {user, setUser} = useContext(AuthUserContext);
-  console.log('user', user);
-
+  console.log('user mingau', user);
   useEffect(() => {
     const unsubscriber = auth().onAuthStateChanged(authUser => {
       authUser ? setUser(authUser) : setUser(null);

@@ -12,7 +12,11 @@ const Preload = ({navigation}) => {
   const getUserCache = async () => {
     try {
       const user = await AsyncStorage.getItem('user');
-      return user != null ? JSON.parse(user) : null;
+      if (user) {
+        return JSON.parse(user);
+      } else {
+        return null;
+      }
     } catch (err) {
       console.error('Erro', err.message);
     }
@@ -29,16 +33,11 @@ const Preload = ({navigation}) => {
           }),
         );
       }
-      /*
+
       if (!user) {
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{name: 'SignIn'}],
-          }),
-        );
+        navigation.navigate('SignIn');
       }
-      */
+
       await auth().signInWithEmailAndPassword(user.email, user.password);
       /*
       navigation.dispatch(

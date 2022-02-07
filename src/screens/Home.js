@@ -66,6 +66,15 @@ const Home = ({navigation}) => {
     );
   };
 
+  const goToReports = () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{name: 'Reports'}],
+      }),
+    );
+  };
+
   return (
     <View style={styles.container}>
       {list.map((item, i) => (
@@ -81,7 +90,14 @@ const Home = ({navigation}) => {
           </ListItem.Content>
         </ListItem>
       ))}
-      <MeuButton style={styles.button} texto="grupos" onClick={goToGroups} />
+      <View style={styles.btnContainer}>
+        <MeuButton style={styles.button} texto="grupos" onClick={goToGroups} />
+        <MeuButton
+          style={styles.button}
+          texto="denuncias"
+          onClick={goToReports}
+        />
+      </View>
       {loading && <Loading />}
     </View>
   );
@@ -100,7 +116,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
 
-  button: {
+  btnContainer: {
     marginTop: 75,
   },
 });
