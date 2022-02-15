@@ -1,5 +1,5 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import Home from '../screens/Home';
 import User from '../screens/User';
 import Preload from '../screens/Preload';
@@ -7,20 +7,43 @@ import Groups from '../screens/Groups';
 import Group from '../screens/Group';
 import Reports from '../screens/Reports';
 import Report from '../screens/Report';
+import {dark, primary, white} from '../assets/colors';
+import LogoutButton from '../components/LogoutButton';
+import CustomDrawerContent from '../components/CustomDrawerContent';
 
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 function AppStack() {
   return (
-    <Stack.Navigator initialRouteName="Preload">
-      <Stack.Screen name="Preload" component={Preload} options={preloadStyle} />
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Group" component={Group} options={GroupStyle} />
-      <Stack.Screen name="Groups" component={Groups} options={GroupsStyle} />
-      <Stack.Screen name="Report" component={Report} options={ReportStyle} />
-      <Stack.Screen name="Reports" component={Reports} options={ReportsStyle} />
-      <Stack.Screen name="User" component={User} options={userStyle} />
-    </Stack.Navigator>
+    <Drawer.Navigator
+      initialRouteName="Preload"
+      screenOptions={{
+        headerShown: 'true',
+        headerStyle: {
+          backgroundColor: primary,
+          paddingRight: 5,
+        },
+        headerTintColor: white,
+        headerRight: () => <LogoutButton />,
+      }}
+      /* drawerContent={props => <CustomDrawerContent {...props} />} */
+    >
+      <Drawer.Screen
+        name="Preload"
+        component={Preload}
+        options={preloadStyle}
+      />
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Group" component={Group} options={GroupStyle} />
+      <Drawer.Screen name="Groups" component={Groups} options={GroupsStyle} />
+      <Drawer.Screen name="Report" component={Report} options={ReportStyle} />
+      <Drawer.Screen
+        name="Reports"
+        component={Reports}
+        options={ReportsStyle}
+      />
+      <Drawer.Screen name="User" component={User} options={userStyle} />
+    </Drawer.Navigator>
   );
 }
 
