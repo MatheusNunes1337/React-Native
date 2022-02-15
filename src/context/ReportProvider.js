@@ -29,7 +29,6 @@ export const ReportProvider = ({children}) => {
           uid: key[1],
         });
       });
-
       setReports(data);
     } catch (response) {
       setErrorMessage(response);
