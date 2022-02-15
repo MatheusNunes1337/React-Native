@@ -1,23 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Alert} from 'react-native';
 import {Button, Image} from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import RNRestart from 'react-native-restart';
 import {primary} from '../assets/colors';
+import {AuthUserContext} from '../context/AuthUserProvider';
 
 const LogoutButton = () => {
-  const signOut = async () => {
-    try {
-      await AsyncStorage.removeItem('user');
-      auth().signOut();
-      RNRestart.Restart();
-    } catch (err) {
-      Alert.alert('Erro', err.message);
-    }
-  };
+  const {signOut} = useContext(AuthUserContext);
 
-  return <Button buttonStyle={styles.button} onPress={signOut} title="sair" />;
+  return (
+    <Button
+      buttonStyle={styles.button}
+      onPress={() => signOut()}
+      title="sair"
+    />
+  );
 };
 
 export default LogoutButton;
