@@ -5,9 +5,11 @@ import auth from '@react-native-firebase/auth';
 import {Image} from 'react-native-elements';
 import {CommonActions} from '@react-navigation/routers';
 import {ApiContext} from '../context/ApiProvider';
+import {AuthUserContext} from '../context/AuthUserProvider';
 
 const Preload = ({navigation}) => {
   const {getApi} = useContext(ApiContext);
+  const {setUser} = useContext(AuthUserContext);
 
   const getUserCache = async () => {
     try {
@@ -25,6 +27,7 @@ const Preload = ({navigation}) => {
   const login = async () => {
     try {
       const user = await getUserCache();
+      setUser(user);
       if (user) {
         navigation.dispatch(
           CommonActions.reset({
@@ -33,10 +36,11 @@ const Preload = ({navigation}) => {
           }),
         );
       }
-
+      /*
       if (!user) {
         navigation.navigate('SignIn');
       }
+      */
 
       await auth().signInWithEmailAndPassword(user.email, user.password);
       /*
