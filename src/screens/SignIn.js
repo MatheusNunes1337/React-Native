@@ -18,35 +18,30 @@ const SignIn = ({navigation}) => {
 
   const storeUser = async value => {
     try {
-      value.pass = password;
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem('user', jsonValue);
-
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{name: 'Home'}],
-        }),
-      );
-    } catch (err) {
-      console.error(err.message);
+    } catch (error) {
+      Alert.alert('Erro', error.message);
     }
   };
 
-  const getUser = async () => {
-    try {
-      const doc = await firestore()
-        .collection('users')
-        .doc(auth().currentUser.uid)
-        .get();
-      if (doc.exists) {
-        storeUser(doc.data());
-      } else {
-        console.log('O documento não existe na base de dados!');
-      }
-    } catch (err) {
-      Alert.alert('Erro', err.message);
-    }
+  const getUser = async pass => {
+    firestore()
+      .collection('users')
+      .doc(auth().currentUser.uid)
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          doc.data().pass = pass;
+          storeUser(doc.data());
+          return doc.data();
+        } else {
+          console.error('Documento não localizado na base de dados');
+        }
+      })
+      .catch(error => {
+        Alert.alert('Erro', error.message);
+      });
   };
 
   async function entrar() {
@@ -58,7 +53,7 @@ const SignIn = ({navigation}) => {
       if (!auth().currentUser.emailVerified) {
         throw new Error('Você deve verificar o seu email para prosseguir');
       }
-      getUser();
+      getUser(password);
     } catch (err) {
       switch (err.code) {
         case 'auth/user-not-found':

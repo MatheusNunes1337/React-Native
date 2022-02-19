@@ -21,7 +21,6 @@ function AppStack() {
         headerShown: 'true',
         headerStyle: {
           backgroundColor: primary,
-          paddingRight: 5,
         },
         headerTintColor: white,
         headerRight: () => <LogoutButton />,

@@ -5,8 +5,8 @@ import {GroupContext} from '../context/GroupProvider';
 import Loading from '../components/Loading';
 import {CommonActions} from '@react-navigation/native';
 import MeuButton from '../components/MeuButton';
-import {Input} from 'react-native-elements';
-import {gray} from '../assets/colors';
+import {Button, Input} from 'react-native-elements';
+import {gray, primary} from '../assets/colors';
 
 const Group = ({route, navigation}) => {
   const [name, setName] = useState('');
@@ -110,7 +110,7 @@ const Group = ({route, navigation}) => {
         onChangeText={e => setTopics(e)}
         value={topics}
       />
-      <MeuButton texto="Salvar" onClick={save} />
+      <Button title="Salvar" buttonStyle={styles.button} onClick={save} />
       {uid ? <MeuButton texto="Deletar" onClick={remove} /> : null}
     </View>
   );
@@ -131,5 +131,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingLeft: 2,
     paddingBottom: 1,
+  },
+  button: {
+    width: 350,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: primary,
+    padding: 10,
+    margin: 10,
+    borderRadius: 5,
+    textAlign: 'center',
   },
 });

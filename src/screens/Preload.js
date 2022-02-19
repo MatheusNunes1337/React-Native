@@ -11,16 +11,16 @@ const Preload = ({navigation}) => {
   const {getApi} = useContext(ApiContext);
   const {setUser} = useContext(AuthUserContext);
 
+  useEffect(() => {
+    login();
+  }, []);
+
   const getUserCache = async () => {
     try {
-      const user = await AsyncStorage.getItem('user');
-      if (user) {
-        return JSON.parse(user);
-      } else {
-        return null;
-      }
-    } catch (err) {
-      console.error('Erro', err.message);
+      const jsonValue = await AsyncStorage.getItem('user');
+      return jsonValue !== null ? jsonValue : null;
+    } catch (error) {
+      Alert.alert('Erro', error.message);
     }
   };
 
@@ -29,20 +29,9 @@ const Preload = ({navigation}) => {
       const user = await getUserCache();
       setUser(user);
       if (user) {
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{name: 'Home'}],
-          }),
-        );
+        navigation.navigate('Home');
       }
-      /*
-      if (!user) {
-        navigation.navigate('SignIn');
-      }
-      */
-
-      await auth().signInWithEmailAndPassword(user.email, user.password);
+      //await auth().signInWithEmailAndPassword(user.email, user.password);
       /*
       navigation.dispatch(
         CommonActions.reset({

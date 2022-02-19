@@ -58,11 +58,6 @@ const Reports = ({navigation}) => {
           </ListItem.Content>
         </ListItem>
       ))}
-      <MeuButton
-        style={styles.button}
-        texto="Nova denuncia"
-        onClick={createReport}
-      />
       {loading && <Loading />}
     </View>
   );

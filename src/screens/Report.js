@@ -1,12 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
+import {Button} from 'react-native-elements';
 
 import {ReportContext} from '../context/ReportProvider';
 import Loading from '../components/Loading';
 import {CommonActions} from '@react-navigation/native';
 import MeuButton from '../components/MeuButton';
 import {Input} from 'react-native-elements';
-import {gray} from '../assets/colors';
+import {gray, primary} from '../assets/colors';
 
 const Report = ({route, navigation}) => {
   const [description, setDescription] = useState('');
@@ -100,7 +101,7 @@ const Report = ({route, navigation}) => {
           value={analyzed}
         />
       ) : null}
-      <MeuButton texto="Salvar" onClick={save} />
+      <Button title="Salvar" buttonStyle={styles.button} onClick={save} />
       {uid ? <MeuButton texto="Deletar" onClick={remove} /> : null}
     </View>
   );
@@ -114,12 +115,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    width: '95%',
+    width: 10,
     height: 50,
     borderBottomColor: gray,
     borderBottomWidth: 2,
     fontSize: 16,
     paddingLeft: 2,
     paddingBottom: 1,
+  },
+
+  button: {
+    width: 350,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: primary,
+    padding: 10,
+    margin: 10,
+    borderRadius: 5,
+    textAlign: 'center',
   },
 });

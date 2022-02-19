@@ -75,6 +75,6 @@ const styles = StyleSheet.create({
   itemMenuText: {
     fontSize: 16,
     margin: 10,
-    color: primary,
+    color: 'primary',
   },
 });
