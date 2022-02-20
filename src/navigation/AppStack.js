@@ -25,14 +25,13 @@ function AppStack() {
         headerTintColor: white,
         headerRight: () => <LogoutButton />,
       }}
-      /* drawerContent={props => <CustomDrawerContent {...props} />} */
-    >
+      drawerContent={props => <CustomDrawerContent {...props} />}>
       <Drawer.Screen
         name="Preload"
         component={Preload}
         options={preloadStyle}
       />
-      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Home" component={Home} options={homeStyle} />
       <Drawer.Screen name="Group" component={Group} options={GroupStyle} />
       <Drawer.Screen name="Groups" component={Groups} options={GroupsStyle} />
       <Drawer.Screen name="Report" component={Report} options={ReportStyle} />
@@ -50,6 +49,10 @@ export default AppStack;
 
 const preloadStyle = {
   headerShown: false,
+};
+
+const homeStyle = {
+  title: 'Home',
 };
 
 const userStyle = {

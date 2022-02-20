@@ -10,7 +10,7 @@ const CustomDrawerContent = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header} />
+      <DrawerHeader style={styles.header} />
       <View style={styles.body}>
         <ScrollView style={styles.scrowView}>
           <View style={styles.divItem}>
@@ -28,7 +28,7 @@ const CustomDrawerContent = ({navigation}) => {
             </Text>
           </View>
           <View style={styles.divItem}>
-            <Text style={styles.itemMenuText} onPress={() => signOut}>
+            <Text style={styles.itemMenuText} onPress={() => signOut()}>
               Sair
             </Text>
           </View>
@@ -56,25 +56,22 @@ const styles = StyleSheet.create({
     flex: 6,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    width: 100,
-    paddingLeft: 20,
+    width: '100%',
     paddingTop: 35,
   },
-  scrowView: {
-    width: 100,
-  },
   divItem: {
-    width: 100,
-    height: 20,
+    width: 200,
+    height: 50,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
     margin: 10,
+    paddingLeft: 15,
   },
 
   itemMenuText: {
-    fontSize: 16,
-    margin: 10,
-    color: 'primary',
+    fontSize: 18,
+    color: primary,
+    fontWeight: 'bold',
   },
 });
