@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {Button} from 'react-native-elements';
 
 import {ReportContext} from '../context/ReportProvider';
 import Loading from '../components/Loading';
 import {ListItem} from 'react-native-elements';
 import {CommonActions} from '@react-navigation/native';
-import MeuButton from '../components/MeuButton';
+import {primary} from '../assets/colors';
 
 const Reports = ({navigation}) => {
   const [data, setData] = useState([]);
@@ -35,12 +36,7 @@ const Reports = ({navigation}) => {
   };
 
   const createReport = () => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{name: 'Report'}],
-      }),
-    );
+    navigation.navigate('Report');
   };
 
   return (
@@ -58,6 +54,11 @@ const Reports = ({navigation}) => {
           </ListItem.Content>
         </ListItem>
       ))}
+      <Button
+        title="Nova denúncia"
+        buttonStyle={styles.button}
+        onPress={() => createReport()}
+      />
       {loading && <Loading />}
     </View>
   );
@@ -77,6 +78,14 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    marginTop: 75,
+    width: 350,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: primary,
+    padding: 10,
+    margin: 40,
+    borderRadius: 5,
+    textAlign: 'center',
   },
 });

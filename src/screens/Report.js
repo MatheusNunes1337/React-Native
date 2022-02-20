@@ -5,7 +5,6 @@ import {Button} from 'react-native-elements';
 import {ReportContext} from '../context/ReportProvider';
 import Loading from '../components/Loading';
 import {CommonActions} from '@react-navigation/native';
-import MeuButton from '../components/MeuButton';
 import {Input} from 'react-native-elements';
 import {gray, primary} from '../assets/colors';
 
@@ -14,7 +13,7 @@ const Report = ({route, navigation}) => {
   const [targetType, setTarget] = useState('');
   const [analyzed, isAnalyzed] = useState('não');
   const [uid, setUid] = useState('');
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
   const {createReport, updateReport, deleteReport} = useContext(ReportContext);
 
   useEffect(() => {
@@ -38,16 +37,19 @@ const Report = ({route, navigation}) => {
 
   const save = async () => {
     if (description && targetType && analyzed) {
-      let report = {uid, description, targetType, analyzed};
-
-      setLoading(true);
+      let report = {
+        uid,
+        description,
+        targetType,
+        analyzed,
+      };
       if (uid) {
         await updateReport(report);
       } else {
         await createReport(report);
       }
-      setLoading(false);
-      navigation.goBack();
+      //setLoading(false);
+      navigation.navigate('Reports');
     } else {
       Alert.alert('Atenção', 'Digite todos os campos do formulário');
     }
@@ -66,10 +68,10 @@ const Report = ({route, navigation}) => {
         {
           text: 'Sim',
           onPress: async () => {
-            setLoading(true);
+            //setLoading(true);
             await deleteReport(uid);
-            setLoading(false);
-            navigation.goBack();
+            //setLoading(false);
+            navigation.navigate('Reports');
           },
         },
       ],
@@ -101,8 +103,18 @@ const Report = ({route, navigation}) => {
           value={analyzed}
         />
       ) : null}
-      <Button title="Salvar" buttonStyle={styles.button} onClick={save} />
-      {uid ? <MeuButton texto="Deletar" onClick={remove} /> : null}
+      <Button
+        title="Salvar"
+        buttonStyle={styles.button}
+        onPress={() => save()}
+      />
+      {uid ? (
+        <Button
+          title="Deletar"
+          buttonStyle={styles.button}
+          onPress={() => remove()}
+        />
+      ) : null}
     </View>
   );
 };
