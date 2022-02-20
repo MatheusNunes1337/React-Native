@@ -23,7 +23,6 @@ const Group = ({route, navigation}) => {
     setDiscipline('');
     setTopics('');
     setUid('');
-    console.log('ROUTEEEE', route);
     if (route.params) {
       if (route.params.group) {
         setName(route.params.group.name);
@@ -54,7 +53,7 @@ const Group = ({route, navigation}) => {
         await saveGroup(group);
       }
       setLoading(false);
-      navigation.goBack();
+      navigation.navigate('Groups');
     } else {
       Alert.alert('Atenção', 'Digite todos os campos do formulário');
     }
@@ -73,7 +72,7 @@ const Group = ({route, navigation}) => {
           setLoading(true);
           await deleteGroup(uid);
           setLoading(false);
-          navigation.goBack();
+          navigation.navigate('Groups');
         },
       },
     ]);
@@ -110,8 +109,18 @@ const Group = ({route, navigation}) => {
         onChangeText={e => setTopics(e)}
         value={topics}
       />
-      <Button title="Salvar" buttonStyle={styles.button} onClick={save} />
-      {uid ? <MeuButton texto="Deletar" onClick={remove} /> : null}
+      <Button
+        title="Salvar"
+        buttonStyle={styles.button}
+        onPress={() => save()}
+      />
+      {uid ? (
+        <Button
+          title="Deletar"
+          buttonStyle={styles.button}
+          onPress={() => remove()}
+        />
+      ) : null}
     </View>
   );
 };

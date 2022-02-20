@@ -3,9 +3,10 @@ import {StyleSheet, View} from 'react-native';
 
 import {GroupContext} from '../context/GroupProvider';
 import Loading from '../components/Loading';
-import {ListItem} from 'react-native-elements';
+import {Button, ListItem} from 'react-native-elements';
 import {CommonActions} from '@react-navigation/native';
 import MeuButton from '../components/MeuButton';
+import {primary} from '../assets/colors';
 
 const Groups = ({navigation}) => {
   const [data, setData] = useState([]);
@@ -35,12 +36,7 @@ const Groups = ({navigation}) => {
   };
 
   const goToGroup = () => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{name: 'Group'}],
-      }),
-    );
+    navigation.navigate('Group');
   };
 
   return (
@@ -57,7 +53,11 @@ const Groups = ({navigation}) => {
           </ListItem.Content>
         </ListItem>
       ))}
-      <MeuButton style={styles.button} texto="Novo grupo" onClick={goToGroup} />
+      <Button
+        title="Novo grupo"
+        buttonStyle={styles.button}
+        onPress={() => goToGroup()}
+      />
       {loading && <Loading />}
     </View>
   );
@@ -77,6 +77,14 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    marginTop: 75,
+    width: 350,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: primary,
+    padding: 10,
+    margin: 40,
+    borderRadius: 5,
+    textAlign: 'center',
   },
 });
