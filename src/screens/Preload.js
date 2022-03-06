@@ -6,6 +6,7 @@ import {Image} from 'react-native-elements';
 import {CommonActions} from '@react-navigation/routers';
 import {ApiContext} from '../context/ApiProvider';
 import {AuthUserContext} from '../context/AuthUserProvider';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Preload = ({navigation}) => {
   const {getApi} = useContext(ApiContext);
@@ -64,6 +65,7 @@ const Preload = ({navigation}) => {
   useEffect(() => {
     login();
     getApi();
+    Icon.loadFont();
   }, []);
 
   return (

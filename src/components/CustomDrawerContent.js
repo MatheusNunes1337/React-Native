@@ -1,6 +1,8 @@
 import React, {useContext} from 'react';
 import {View, StyleSheet, ScrollView, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import FaIcon from 'react-native-vector-icons/FontAwesome';
+import IoIcon from 'react-native-vector-icons/Ionicons';
+import MaIcon from 'react-native-vector-icons/MaterialIcons';
 import DrawerHeader from '../components/DrawerHeader';
 import {AuthUserContext} from '../context/AuthUserProvider';
 import {primary, white} from '../assets/colors';
@@ -14,6 +16,7 @@ const CustomDrawerContent = ({navigation}) => {
       <View style={styles.body}>
         <ScrollView style={styles.scrowView}>
           <View style={styles.divItem}>
+            <FaIcon name="group" size={20} color={primary} />
             <Text
               style={styles.itemMenuText}
               onPress={() => navigation.navigate('Groups')}>
@@ -21,6 +24,7 @@ const CustomDrawerContent = ({navigation}) => {
             </Text>
           </View>
           <View style={styles.divItem}>
+            <MaIcon name="report" size={25} color={primary} />
             <Text
               style={styles.itemMenuText}
               onPress={() => navigation.navigate('Reports')}>
@@ -28,6 +32,7 @@ const CustomDrawerContent = ({navigation}) => {
             </Text>
           </View>
           <View style={styles.divItem}>
+            <IoIcon name="log-out" size={30} color={primary} />
             <Text style={styles.itemMenuText} onPress={() => signOut()}>
               Sair
             </Text>
@@ -72,6 +77,7 @@ const styles = StyleSheet.create({
   itemMenuText: {
     fontSize: 18,
     color: primary,
+    paddingLeft: 10,
     fontWeight: 'bold',
   },
 });
