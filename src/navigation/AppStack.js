@@ -10,6 +10,8 @@ import Report from '../screens/Report';
 import {dark, primary, white} from '../assets/colors';
 import LogoutButton from '../components/LogoutButton';
 import CustomDrawerContent from '../components/CustomDrawerContent';
+import GroupsIndex from '../screens/GroupIndex';
+import MapGroupsTab from '../screens/MapGroupsTab';
 
 const Drawer = createDrawerNavigator();
 
@@ -32,8 +34,18 @@ function AppStack() {
         options={preloadStyle}
       />
       <Drawer.Screen name="Home" component={Home} options={homeStyle} />
+      <Drawer.Screen
+        name="GroupsIndex"
+        component={GroupsIndex}
+        options={GroupStyle}
+      />
       <Drawer.Screen name="Group" component={Group} options={GroupStyle} />
       <Drawer.Screen name="Groups" component={Groups} options={GroupsStyle} />
+      <Drawer.Screen
+        name="MapGroupsTab"
+        component={MapGroupsTab}
+        options={GroupsStyle}
+      />
       <Drawer.Screen name="Report" component={Report} options={ReportStyle} />
       <Drawer.Screen
         name="Reports"

@@ -19,7 +19,7 @@ const CustomDrawerContent = ({navigation}) => {
             <FaIcon name="group" size={20} color={primary} />
             <Text
               style={styles.itemMenuText}
-              onPress={() => navigation.navigate('Groups')}>
+              onPress={() => navigation.navigate('GroupsIndex')}>
               Grupos
             </Text>
           </View>
