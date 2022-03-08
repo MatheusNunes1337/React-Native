@@ -26,6 +26,8 @@ export const GroupProvider = ({children}) => {
           name: d.fields.name.stringValue,
           description: d.fields.description.stringValue,
           discipline: d.fields.discipline.stringValue,
+          latitude: d.fields.latitude.stringValue,
+          longitude: d.fields.longitude.stringValue,
           topics: d.fields.topics.stringValue,
           uid: key[1],
         });

@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 const GroupsIndex = () => {
   return (
     <Tab.Navigator
-      tabBarOptions={{
+      screenOptions={{
         initialRouteName: 'Groups',
         activeTintColor: primary,
         labelStyle: {
