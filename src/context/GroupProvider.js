@@ -1,5 +1,6 @@
 import React, {createContext, useState, useContext} from 'react';
-import {ToastAndroid} from 'react-native';
+import {Alert, ToastAndroid} from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 
 import {ApiContext} from '../context/ApiProvider';
 
@@ -41,29 +42,30 @@ export const GroupProvider = ({children}) => {
     }
   };
 
-  const filterGroups = async name => {
-    try {
-      const response = await api.get('/groups');
-      let data = [];
-      response.data.documents.map(d => {
-        let key = d.name.split(
-          'projects/projetorn-1380c/databases/(default)/documents/groups',
-        );
-        data.push({
-          name: d.fields.name.stringValue,
-          description: d.fields.description.stringValue,
-          discipline: d.fields.discipline.stringValue,
-          topics: d.fields.topics.stringValue,
-          uid: key[1],
-        });
+  const filterGroups = async filter => {
+    const groupRef = firestore().collection('groups');
+    const filteredGroup = await groupRef.where('name', '==', filter).get();
+
+    if (filteredGroup.empty) {
+      showToast('No matching documents.');
+      console.log('No matching documents.');
+      return;
+    }
+
+    let data = [];
+    filteredGroup.forEach(doc => {
+      data.push({
+        name: doc.data().name,
+        description: doc.data().description,
+        discipline: doc.data().discipline,
+        latitude: doc.data().latitude,
+        longitude: doc.data().longitude,
+        topics: doc.data().topics,
+        uid: doc.id,
       });
       data.sort((a, b) => b.name.localeCompare(a.name));
       setGroups(data);
-    } catch (response) {
-      setErrorMessage(response);
-      console.log('Erro ao buscar via API');
-      console.log(response);
-    }
+    });
   };
 
   const saveGroup = async data => {
@@ -121,6 +123,7 @@ export const GroupProvider = ({children}) => {
       value={{
         groups,
         getGroups,
+        filterGroups,
         saveGroup,
         updateGroup,
         deleteGroup,

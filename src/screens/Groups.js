@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 
 import {GroupContext} from '../context/GroupProvider';
 import Loading from '../components/Loading';
-import {Button, ListItem} from 'react-native-elements';
+import {Button, Input, ListItem} from 'react-native-elements';
 import {CommonActions} from '@react-navigation/native';
 import MeuButton from '../components/MeuButton';
 import {primary} from '../assets/colors';
@@ -11,7 +11,8 @@ import {primary} from '../assets/colors';
 const Groups = ({navigation}) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const {getGroups, groups} = useContext(GroupContext);
+  const [filter, setFilter] = useState('');
+  const {getGroups, filterGroups, groups} = useContext(GroupContext);
 
   const fetchData = async () => {
     await getGroups();
@@ -35,12 +36,24 @@ const Groups = ({navigation}) => {
     );
   };
 
+  const searchSubmit = async () => {
+    await filterGroups(filter);
+  };
+
   const goToGroup = () => {
     navigation.navigate('Group');
   };
 
   return (
     <View style={styles.container}>
+      <Input
+        style={styles.input}
+        placeholder="buscar grupo"
+        keyboardType="default"
+        returnKeyType="search"
+        onSubmitEditing={searchSubmit}
+        onChangeText={e => setFilter(e)}
+      />
       {data.map((item, i) => (
         <ListItem
           key={i}
@@ -70,6 +83,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+
+  input: {
+    width: 350,
+    marginTop: 30,
+  },
+
   list: {
     width: 350,
     height: 100,
